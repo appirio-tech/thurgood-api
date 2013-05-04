@@ -11,13 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130504100813) do
+ActiveRecord::Schema.define(:version => 20130504102358) do
 
   create_table "api_keys", :force => true do |t|
     t.string   "access_token"
     t.string   "description"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "servers", :force => true do |t|
+    t.string   "name"
+    t.string   "installed_services"
+    t.string   "instance_url"
+    t.string   "operating_system"
+    t.string   "password"
+    t.string   "platform"
+    t.string   "repo_name"
+    t.string   "status"
+    t.string   "languages"
+    t.string   "username"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
 end

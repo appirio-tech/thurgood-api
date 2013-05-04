@@ -19,3 +19,4 @@ group :development do
 end
 
 gem 'debugger'
+gem 'rack-timeout'

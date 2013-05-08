@@ -11,13 +11,46 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130504102358) do
+ActiveRecord::Schema.define(:version => 20130507200942) do
 
   create_table "api_keys", :force => true do |t|
-    t.string   "access_token"
     t.string   "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "access_key"
+  end
+
+  create_table "jobs", :force => true do |t|
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.string   "status"
+    t.string   "email"
+    t.string   "platform"
+    t.string   "language"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "papertrail_system"
+    t.string   "job_id"
+  end
+
+  create_table "logger_accounts", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "papertrail_id"
+    t.string   "papertrail_api_token"
+  end
+
+  create_table "logger_systems", :force => true do |t|
+    t.string   "name"
+    t.string   "papertrail_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "logger_account_id"
+    t.string   "papertrail_account_id"
+    t.string   "syslog_hostname"
+    t.string   "syslog_port"
   end
 
   create_table "servers", :force => true do |t|
@@ -33,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20130504102358) do
     t.string   "username"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.string   "job_id"
   end
 
 end

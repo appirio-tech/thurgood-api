@@ -28,6 +28,7 @@ GEM
     activesupport (3.2.12)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.3.3)
     api_smith (1.2.0)
       hashie (~> 1.0)
       httparty
@@ -41,6 +42,7 @@ GEM
     builder (3.0.4)
     coderay (1.0.9)
     columnize (0.3.6)
+    crack (0.3.1)
     debug_inspector (0.0.2)
     debugger (1.5.0)
       columnize (>= 0.3.1)
@@ -50,6 +52,11 @@ GEM
     debugger-ruby_core_source (1.2.0)
     diff-lcs (1.2.1)
     erubis (2.7.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     hashie (1.2.0)
     hike (1.2.2)
     httparty (0.10.2)
@@ -123,6 +130,7 @@ GEM
     sextant (0.2.3)
       activesupport (>= 3.2)
       rails (>= 3.2)
+    spork (0.9.2)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -138,6 +146,10 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    vcr (2.4.0)
+    webmock (1.8.11)
+      addressable (>= 2.2.7)
+      crack (>= 0.1.7)
     will_paginate (3.0.4)
 
 PLATFORMS
@@ -147,6 +159,9 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   debugger
+  factory_girl_rails
+  hashie (= 1.2.0)
+  httparty
   meta_request (= 0.2.1)
   pg
   rack-timeout
@@ -155,4 +170,7 @@ DEPENDENCIES
   rocket_pants (~> 1.0)
   rspec-rails (~> 2.6)
   sextant
+  spork
   unicorn
+  vcr
+  webmock

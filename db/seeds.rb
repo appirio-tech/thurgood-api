@@ -6,27 +6,27 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Server.create(name: 'sfdc-deploy1', instance_url: 'https://login.salesforce.com', 
-	password: '7Z8{Io28JiG7mvOEFXjXgmSVTauITbliqFC', platform: 'Salesforce.com', 
+	password: '7Z8{Io28JiG7mvOEFXjXgmSVTauITbliqFC', platform: 'salesforce.com', 
 	repo_name: 'sfdc-deploy1', status: 'available', username: 'squirrel1@deploy.cloudspokes.com',
-	languages: 'Apex')
+	languages: 'apex')
 
 Server.create(name: 'sfdc-deploy2', instance_url: 'https://login.salesforce.com', 
-	password: '4$6^46[>hksLTxNUW78MTD8jGXNpjCRr7e', platform: 'Salesforce.com', 
+	password: '4$6^46[>hksLTxNUW78MTD8jGXNpjCRr7e', platform: 'salesforce.com', 
 	repo_name: 'sfdc-deploy2', status: 'available', username: 'squirrel2@deploy.cloudspokes.com',
-	languages: 'Apex')
+	languages: 'apex')
 
 Server.create(name: 'sfdc-deploy3', instance_url: 'https://login.salesforce.com', 
-	password: '[9%/98U8*iaBnGJj9TFfEjIGb35QoRPnJo', platform: 'Salesforce.com', 
+	password: '[9%/98U8*iaBnGJj9TFfEjIGb35QoRPnJo', platform: 'salesforce.com', 
 	repo_name: 'sfdc-deploy3', status: 'available', username: 'squirrel3@deploy.cloudspokes.com',
-	languages: 'Apex')
+	languages: 'apex')
 
 
 Server.create(name: 'java-deploy1', instance_url: 'http://www.heroku.com', 
-	password: '[9%/98U8*iaBnGJj9TFfEjIGb35QoRPnJo', platform: 'Heroku', 
+	password: '[9%/98U8*iaBnGJj9TFfEjIGb35QoRPnJo', platform: 'heroku', 
 	repo_name: 'java-deploy1', status: 'available', username: 'java1@deploy.cloudspokes.com',
-	languages: 'Java')
+	languages: 'java')
 
 Server.create(name: 'java-deploy1', instance_url: 'http://www.cloudfoundry.com', 
-	password: '[9%/98U8*iaBnGJj9TFfEjIGb35QoRPnJo', platform: 'Cloud Foundry', 
+	password: '[9%/98U8*iaBnGJj9TFfEjIGb35QoRPnJo', platform: 'cloud foundry', 
 	repo_name: 'java-deploy2', status: 'available', username: 'java2@deploy.cloudspokes.com',
-	languages: 'Java')
+	languages: 'java')

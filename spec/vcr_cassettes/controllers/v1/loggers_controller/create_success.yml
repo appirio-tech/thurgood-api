@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/accounts
+    body:
+      encoding: US-ASCII
+      string: id=someid&name=somename&user[id]=someid&user[email]=some%40email.com&plan=free
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 07 May 2013 11:55:09 GMT
+      Server:
+      - Apache/2.2.17 (Fedora)
+      X-Powered-By:
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.17
+      Etag:
+      - ! '"748ee845f110dc01004a42caa8f52a7b"'
+      X-Runtime:
+      - '752'
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlOTIwZmYxMWU5YTFkODNmMmRkZmNjYWQ1YjU2OGVlNzU%3D--d0706f37ba3dd287d03698ec945d0efced82540a;
+        path=/; secure; HttpOnly
+      Content-Length:
+      - '140'
+      Status:
+      - '200'
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: US-ASCII
+      string: ! '{"api_token":"N3QdUUvk6c4ZubFtgJZ5","log_data_transfer":0,"plan":"free","log_data_transfer_limit":104857600,"name":"somename","id":"someid"}'
+    http_version: !!null 
+  recorded_at: Tue, 07 May 2013 11:55:10 GMT
+recorded_with: VCR 2.4.0

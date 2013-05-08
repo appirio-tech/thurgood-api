@@ -5,11 +5,20 @@ gem 'rails', '3.2.12'
 gem 'rocket_pants', '~> 1.0'
 gem 'pg'
 gem 'unicorn'
+gem 'httparty'
+gem 'hashie', '1.2.0'
 
 group :development, :test do
 	gem 'rspec-rails', '~> 2.6'
 	gem 'sextant'
 	gem 'rake'
+	gem 'vcr'
+	gem 'webmock'
+	gem 'spork'
+end
+
+group :test do
+  gem 'factory_girl_rails'
 end
 
 group :development do

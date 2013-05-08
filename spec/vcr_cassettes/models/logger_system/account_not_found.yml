@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/systems
+    body:
+      encoding: US-ASCII
+      string: id=testsystem1&name=testsystem1&account_id=test-rails1
+    headers: {}
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Tue, 07 May 2013 19:36:43 GMT
+      Server:
+      - Apache/2.2.17 (Fedora)
+      X-Powered-By:
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.17
+      X-Runtime:
+      - '57'
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlMTNjMjY4NjdlOTI3Yjg1N2JmNjU1YjlhYjE4Y2ViY2M%3D--a2251a5dce55172c1138afc481c1e80beb163085;
+        path=/; secure; HttpOnly
+      Content-Length:
+      - '31'
+      Status:
+      - '404'
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: US-ASCII
+      string: ! '{"message":"Account not found"}'
+    http_version: !!null 
+  recorded_at: Tue, 07 May 2013 19:36:43 GMT
+recorded_with: VCR 2.4.0

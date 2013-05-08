@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/systems
+    body:
+      encoding: US-ASCII
+      string: id=testsystem1&name=testsystem1&account_id=test-rails1
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 07 May 2013 20:05:57 GMT
+      Server:
+      - Apache/2.2.17 (Fedora)
+      X-Powered-By:
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.17
+      Etag:
+      - ! '"6825a787b63ab14d391cdead591b5518"'
+      X-Runtime:
+      - '923'
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlZGQ1MWI4YWQ1NjIyZTI2ZGQ2NTJhODM0Njk0ODgzZTA%3D--67643ce3c6315a5f526d7ac3ca297f9e31472f15;
+        path=/; secure; HttpOnly
+      Content-Length:
+      - '112'
+      Status:
+      - '200'
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: US-ASCII
+      string: ! '{"syslog_hostname":"cloudspokes1.papertrailapp.com","syslog_port":29949,"name":"testsystem1","id":"testsystem1"}'
+    http_version: !!null 
+  recorded_at: Tue, 07 May 2013 20:05:59 GMT
+recorded_with: VCR 2.4.0

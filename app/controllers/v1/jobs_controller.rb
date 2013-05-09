@@ -30,7 +30,7 @@ class V1::JobsController < V1::ApplicationController
 
 	def logger
 		job = Job.find_by_job_id(params[:id])
-		expose LoggerSystem.find(job.papertrail_system)
+		expose LoggerSystem.all
 	end	
 
 	def by_user

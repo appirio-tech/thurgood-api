@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507200942) do
+ActiveRecord::Schema.define(:version => 20130508224212) do
 
   create_table "api_keys", :force => true do |t|
     t.string   "description"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20130507200942) do
     t.datetime "updated_at",        :null => false
     t.string   "papertrail_system"
     t.string   "job_id"
+    t.string   "user_id"
+    t.string   "code_url"
   end
 
   create_table "logger_accounts", :force => true do |t|

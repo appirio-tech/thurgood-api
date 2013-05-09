@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/accounts
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/systems
     body:
       encoding: US-ASCII
-      string: id=test-rails1&name=test-rails1&user[id]=test-rails1&user[email]=test-rails%40cloudspokes.com&plan=free
+      string: id=123456abcd&name=jeffdonthemic-123456abcd&account_id=jeffdonthemic
     headers: {}
   response:
     status:
@@ -13,22 +13,22 @@ http_interactions:
       message: Service Temporarily Unavailable
     headers:
       Date:
-      - Tue, 07 May 2013 11:47:24 GMT
+      - Wed, 08 May 2013 23:48:25 GMT
       Server:
       - Apache/2.2.17 (Fedora)
       X-Powered-By:
       - Phusion Passenger (mod_rails/mod_rack) 3.0.17
       X-Runtime:
-      - '187'
+      - '360'
       Cache-Control:
       - no-cache
       Strict-Transport-Security:
       - max-age=31536000
       Set-Cookie:
-      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlOTE5NTg5Mzk3ZjM5YWFkYTQxMTAwZjc1MmIzOWEyMTE%3D--2e1c4801540174bf32e4dd2d537d386f85ab5907;
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlYjk0YmY2OGNlYWYyYzY2YjBjZDcyZGRlZWRhOGVmZGE%3D--0e9ef7fdb7b06e7df1bb42789993fd8199b1895b;
         path=/; secure; HttpOnly
       Content-Length:
-      - '83'
+      - '118'
       Status:
       - '503'
       Connection:
@@ -37,7 +37,8 @@ http_interactions:
       - application/json; charset=utf-8
     body:
       encoding: US-ASCII
-      string: ! '{"message":"Sorry, could not complete request. Contact support@papertrailapp.com."}'
+      string: ! '{"message":"Could not create sender: Originators is invalid, Originators
+        is invalid, and Name has already been taken"}'
     http_version: !!null 
-  recorded_at: Tue, 07 May 2013 11:47:24 GMT
+  recorded_at: Wed, 08 May 2013 23:48:26 GMT
 recorded_with: VCR 2.4.0

@@ -12,7 +12,9 @@ return codes:
 
 Include the Papertrail docs 
 
-curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"job": {"language": "Apex", "platform": "Salesforce.com", "email": "jeff@cloudspokes.com"}}'  http://localhost:3000/v1/jobs
+Job
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"job": {"code_url": "http://www.cloudspokes.com/code.zip", "language": "Apex", "platform": "Salesforce.com", "email": "jeff@cloudspokes.com", "user_id": "jeffdonthemic"}}'  http://localhost:3000/v1/jobs
 
 Logger Account
 

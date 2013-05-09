@@ -24,18 +24,25 @@ class V1::JobsController < V1::ApplicationController
 		error! :not_found, :metadata => {:details => WIKI_JOB} if !job
 	end
 
-	def by_email
-		expose Job.by_email(params[:email])
+	def server
+		expose Server.find_by_job_id(params[:id])
+	end
+
+	def logger
+		job = Job.find_by_job_id(params[:id])
+		expose LoggerSystem.find(job.papertrail_system)
+	end	
+
+	def by_user
+		expose Job.by_user_id(params[:user_id])
 	end
 
 	def submit
 		job = Job.find_by_job_id(params[:id])
-		server = Server.available(job.language, job.platform)
-		error! :server_unavailable, 
-			:metadata => {:error_description => "Requested server type (#{job.language} & #{job.platform}) is not currently available", 
-			:details => WIKI_JOB} unless server
-		server.reserve
-		expose server
+		job.submit
+		expose job
+	rescue Exception => e
+		error! :bad_request, :metadata => {:error_description => e.message}		
 	end
 
 end

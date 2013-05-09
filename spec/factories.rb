@@ -22,6 +22,19 @@ FactoryGirl.define do
     factory :account_with_unique_email do
       email "test-rails#{Random.rand(100)}@cloudspokes.com"
     end
+
+    factory :logger_account_jeffdonthemic do
+      email "jeff@cloudspokes.com"
+      name 'jeffdonthemic'
+      papertrail_id 'jeffdonthemic'
+    end
+
+    factory :logger_account_jeffdonthemictest1 do
+      email "jeff@cloudspokes.com"
+      name 'jeffdonthemic'
+      papertrail_id 'jeffdonthemictest1'
+    end    
+
   end
 
   factory :logger_system do
@@ -31,9 +44,12 @@ FactoryGirl.define do
   end 
 
   factory :job do
+    user_id 'jeffdonthemic'
     email 'jeff@cloudspokes.com'
     language 'apex'
     platform 'salesforce.com'
+    job_id '123456abcd'
+    code_url 'http://www.cloudspokes.com/some-file.zip'
   end 
 
 end

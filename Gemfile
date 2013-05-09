@@ -9,16 +9,16 @@ gem 'httparty'
 gem 'hashie', '1.2.0'
 
 group :development, :test do
-	gem 'rspec-rails', '~> 2.6'
 	gem 'sextant'
 	gem 'rake'
-	gem 'vcr'
-	gem 'webmock'
-	gem 'spork'
 end
 
 group :test do
+	gem 'rspec-rails', '~> 2.6'
   gem 'factory_girl_rails'
+	gem 'vcr'
+	gem 'webmock'
+	gem 'spork'  
 end
 
 group :development do

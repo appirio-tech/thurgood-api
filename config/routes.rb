@@ -2,9 +2,11 @@ ThurgoodApi::Application.routes.draw do
 
   namespace :v1 do
 
-  	get 'jobs/by_email/:email', to: 'jobs#by_email', :constraints => { :email => /.+@.+\..*/ }
+  	get 'jobs/by_user/:user_id', to: 'jobs#by_user'
     resources :jobs, only: [:index, :create, :show]
     get 'jobs/:id/submit', to: 'jobs#submit'
+    get 'jobs/:id/server', to: 'jobs#server'
+    get 'jobs/:id/logger', to: 'jobs#logger'
 
   	get 'servers/reserved', to: 'servers#by_status', :status => 'reserved'
   	get 'servers/available', to: 'servers#by_status', :status => 'available'

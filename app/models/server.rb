@@ -13,8 +13,19 @@ class Server < ActiveRecord::Base
 		where("status = ? and languages = ? and platform = ?", "available", language.downcase, platform.downcase).first
 	end
 
-	def reserve
-		raise ApiExceptions::ServerNotAvailableError.new 'Requested server is not available'
+	def self.reserve(job_id, language, platform)
+		server = Server.available(language, platform)
+		if server
+			server.status = 'reserved'
+			server.job_id = job_id
+			if  server.save
+				server
+			else
+				raise ApiExceptions::ProcessError.new "Error reserving server: #{server.errors.full_messages}"		
+			end
+		else
+			raise ApiExceptions::ServerNotAvailableError.new "Requested server for #{language} and #{platform} is not available."
+		end
 	end
 
 end

@@ -1,5 +1,21 @@
 module Papertrail
 
+  def self.get_account(id)
+
+    auth = {
+      :username => ENV['PAPERTRAIL_DIST_USERNAME'], 
+      :password => ENV['PAPERTRAIL_DIST_PASSWORD']
+    }    
+    options = { 
+      :basic_auth => auth 
+    }
+
+    results = HTTParty.get("https://papertrailapp.com/api/v1/distributors/accounts/#{id}", options)
+    puts "[DEBUG] Get Papertrail account: #{results.to_yaml}"
+    results
+
+  end
+
 	# id = membername, name = membername, email = email
   def self.create_account(id, name, email)
     # if a nil id is passed, use the name for the id

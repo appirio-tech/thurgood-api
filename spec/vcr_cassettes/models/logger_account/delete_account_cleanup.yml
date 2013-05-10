@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/accounts/test-rails1
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/accounts/test-rails143
     body:
       encoding: US-ASCII
       string: ''
@@ -13,7 +13,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 09 May 2013 11:18:20 GMT
+      - Fri, 10 May 2013 11:33:01 GMT
       Server:
       - Apache/2.2.17 (Fedora)
       X-Powered-By:
@@ -21,13 +21,13 @@ http_interactions:
       Etag:
       - ! '"0f0479874bf6f4a7281099b15df27c27"'
       X-Runtime:
-      - '783'
+      - '966'
       Cache-Control:
       - private, max-age=0, must-revalidate
       Strict-Transport-Security:
       - max-age=31536000
       Set-Cookie:
-      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlMjkyMjQ5MmEyY2Q2NjRiN2FkNThhOGM5YzkwYTI1M2Y%3D--d8214b56d73ad418f45648135d495dfbcccd5854;
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlNzllOTQ1ZWE3NGU3N2I2Yzc5ODEyNzU0ZjBhMDFjMzI%3D--0ac1972d93f8e957672a5bb31565dc02fe90a0fc;
         path=/; secure; HttpOnly
       Content-Length:
       - '15'
@@ -41,5 +41,5 @@ http_interactions:
       encoding: US-ASCII
       string: ! '{"status":"ok"}'
     http_version: !!null 
-  recorded_at: Thu, 09 May 2013 11:18:21 GMT
+  recorded_at: Fri, 10 May 2013 11:33:02 GMT
 recorded_with: VCR 2.4.0

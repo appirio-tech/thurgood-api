@@ -6,17 +6,8 @@ describe LoggerSystem do
 	  it "should return a friendly error if fields are missing" do
 	  	account = create(:account_with_unique_email)
 	  	system = build(:logger_system)
-      expect { system.setup }.to raise_error ApiExceptions::ProcessError, 
-	      'Required fields to create a Logger System are missing.'
+      expect { system.setup }.to raise_error ApiExceptions::ProcessError
 	  end
-
-	  it "should return a friendly error if the pt account already exists" do
-	  	account = build(:logger_account)
-      VCR.use_cassette "models/logger_account/create_existing" do
-	      expect { account.setup }.to raise_error ApiExceptions::ProcessError, 
-		      'The Logger Account already exists.'
-      end	  	
-	  end	  
 
 	  it "should return friendly message when account is not found" do
 	  	account = create(:logger_account)

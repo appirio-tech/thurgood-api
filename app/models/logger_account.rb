@@ -29,6 +29,7 @@ class LoggerAccount < ActiveRecord::Base
 		pt_account = Papertrail.get_account(papertrail_id) if !pt_account.has_key?('api_token') 
 		self.papertrail_api_token = pt_account['api_token']
 		self.papertrail_id = pt_account['id']
+		# TODO -- should this record be inserted into postgres
 		self		
 	end
 end

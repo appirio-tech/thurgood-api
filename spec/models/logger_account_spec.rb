@@ -8,27 +8,18 @@ describe LoggerAccount do
       expect { account.setup }.to raise_error ApiExceptions::ProcessError
 	  end
 
-	  it "should return a friendly error if the pt account already exists" do
-	  	account = build(:logger_account_jeffdonthemic)
-	  	account.papertrail_id = account.name
-      VCR.use_cassette "models/logger_account/create_existing" do
-	      expect { account.setup }.to raise_error ApiExceptions::ProcessError, 
-		      'The Logger Account already exists.'
-      end	  	
-	  end	  
-
 	  it "should successfully create a logger" do
-	  	account = build(:logger_account)
-	  	account.papertrail_id = account.name
+	  	account = create(:logger_account)
+	  	account.papertrail_id = "#{account.name}#{Random.rand(99)}"
       VCR.use_cassette "models/logger_account/create_success" do
         account = account.setup
         account.save
       end
       account.papertrail_api_token.should_not be_nil
-      account.papertrail_id.should == account.name
+      account.papertrail_id.should == account.papertrail_id
 
 			# delete the newly created account now
-      VCR.use_cassette "models/logger_account/delete_account" do
+      VCR.use_cassette "models/logger_account/delete_account_cleanup" do
         Papertrail.delete_account(account.papertrail_id)
       end			
 

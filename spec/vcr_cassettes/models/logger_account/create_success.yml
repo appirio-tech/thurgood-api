@@ -5,7 +5,7 @@ http_interactions:
     uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/accounts
     body:
       encoding: US-ASCII
-      string: id=test-rails1&name=test-rails1&user[id]=test-rails1&user[email]=test-rails%40cloudspokes.com&plan=free
+      string: id=test-rails143&name=test-rails1&user[id]=test-rails143&user[email]=test-rails%40cloudspokes.com&plan=free
     headers: {}
   response:
     status:
@@ -13,24 +13,24 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 09 May 2013 11:18:17 GMT
+      - Fri, 10 May 2013 11:32:59 GMT
       Server:
       - Apache/2.2.17 (Fedora)
       X-Powered-By:
       - Phusion Passenger (mod_rails/mod_rack) 3.0.17
       Etag:
-      - ! '"192eaeb5b4a9d1d11cbf604cd3f80d96"'
+      - ! '"a92c5eb7905ed4f592e1437ad37b9838"'
       X-Runtime:
-      - '2517'
+      - '867'
       Cache-Control:
       - private, max-age=0, must-revalidate
       Strict-Transport-Security:
       - max-age=31536000
       Set-Cookie:
-      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlMjg4ZTMyYzJiMTE4NzU4M2E1MWQ4YzgxOWMyMmJkODQ%3D--42f5d3e26614297611ee3a68c6b5794da5a58f78;
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlMzVjOWFmMDFiNmZmNGQyZDMyNzY0MWQ3NzkxMmM4NTc%3D--579e34edf06a8072589b6da4f6c6503d7d611c55;
         path=/; secure; HttpOnly
       Content-Length:
-      - '148'
+      - '149'
       Status:
       - '200'
       Connection:
@@ -39,7 +39,7 @@ http_interactions:
       - application/json; charset=utf-8
     body:
       encoding: US-ASCII
-      string: ! '{"log_data_transfer_limit":104857600,"api_token":"mn8vTRr2XBSvYXXIi6ix","plan":"free","name":"test-rails1","log_data_transfer":0,"id":"test-rails1"}'
+      string: ! '{"log_data_transfer_limit":104857600,"api_token":"Ty2l85zpxWu9tYDaMkN","name":"test-rails1","log_data_transfer":0,"plan":"free","id":"test-rails143"}'
     http_version: !!null 
-  recorded_at: Thu, 09 May 2013 11:18:19 GMT
+  recorded_at: Fri, 10 May 2013 11:33:00 GMT
 recorded_with: VCR 2.4.0

@@ -12,7 +12,6 @@ describe LoggerSystem do
 
 	  it "should return a friendly error if the pt account already exists" do
 	  	account = build(:logger_account)
-	  	account.papertrail_id = account.name
       VCR.use_cassette "models/logger_account/create_existing" do
 	      expect { account.setup }.to raise_error ApiExceptions::ProcessError, 
 		      'The Logger Account already exists.'
@@ -20,7 +19,7 @@ describe LoggerSystem do
 	  end	  
 
 	  it "should return friendly message when account is not found" do
-	  	account = build(:logger_account)
+	  	account = create(:logger_account)
 	  	account.papertrail_id = 'bad-username'
       VCR.use_cassette "models/logger_account/create_success" do
         account = account.setup
@@ -36,8 +35,8 @@ describe LoggerSystem do
 	  end
 
 	  it "should create a system successfully" do
-	  	account = build(:logger_account)
-	  	account.papertrail_id = account.name
+	  	account = create(:logger_account)
+	  	account.papertrail_id =  "#{account.name}#{Random.rand(99)}"
       VCR.use_cassette "models/logger_account/create_success" do
         account = account.setup
         account.save

@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/accounts/jeffdonthemictest1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Fri, 10 May 2013 10:01:56 GMT
+      Server:
+      - Apache/2.2.17 (Fedora)
+      X-Powered-By:
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.17
+      X-Runtime:
+      - '157'
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlYWQwN2RhYzc4MjNkNWIyYTY0YjBjOWNjNWI1MTM1ODA%3D--14edbf259beae8555e01529b8976e7a85017943e;
+        path=/; secure; HttpOnly
+      Content-Length:
+      - '31'
+      Status:
+      - '404'
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: US-ASCII
+      string: ! '{"message":"Account not found"}'
+    http_version: !!null 
+  recorded_at: Fri, 10 May 2013 10:01:57 GMT
+recorded_with: VCR 2.4.0

@@ -23,7 +23,7 @@ describe V1::JobsController do
 			response.response_code.should == 400
 			results = JSON.parse(response.body)
 			results['error'].should == 'bad_request'
-			results['error_description'].should == "Language can't be blank, Platform can't be blank"
+			results['error_description'].should include("can't be blank")
 		end		
 
 		it "should create a job successfully" do
@@ -31,8 +31,9 @@ describe V1::JobsController do
 			email = 'some@email.com'
 			language = 'apex'
 			platform = 'salesforce.com'
+			code_url = 'http://www.cloudspokes.com/code.zip'
 			post 'create', params = { :job => {:user_id => user_id, :email => email, 
-				:language => language, :platform => platform} }
+				:language => language, :platform => platform, :code_url => code_url} }
 			response.response_code.should == 200
 			results = JSON.parse(response.body)['response']
 			results['job_id'].should_not be_nil

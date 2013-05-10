@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/accounts/jeffdonthemictest1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 10 May 2013 10:01:55 GMT
+      Server:
+      - Apache/2.2.17 (Fedora)
+      X-Powered-By:
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.17
+      Etag:
+      - ! '"0f0479874bf6f4a7281099b15df27c27"'
+      X-Runtime:
+      - '759'
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlODMwNjNjMzhlNjI0ODBkNjBjNzFlZTNmYWE0YTE3MWE%3D--ed8bdc8bc91a1b2cd3e7557c767b796743d85331;
+        path=/; secure; HttpOnly
+      Content-Length:
+      - '15'
+      Status:
+      - '200'
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: US-ASCII
+      string: ! '{"status":"ok"}'
+    http_version: !!null 
+  recorded_at: Fri, 10 May 2013 10:01:56 GMT
+recorded_with: VCR 2.4.0

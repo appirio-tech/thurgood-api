@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/accounts
+    body:
+      encoding: US-ASCII
+      string: id=jeffdonthemic&name=jeffdonthemic&user[id]=jeffdonthemic&user[email]=jeff%40cloudspokes.com&plan=free
+    headers: {}
+  response:
+    status:
+      code: 503
+      message: Service Temporarily Unavailable
+    headers:
+      Date:
+      - Thu, 09 May 2013 11:14:40 GMT
+      Server:
+      - Apache/2.2.17 (Fedora)
+      X-Powered-By:
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.17
+      X-Runtime:
+      - '119'
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlNzU5ZTcwYjY3NmM2YTRmNDcwODNkMjc4M2EzY2YyZGE%3D--4d6336f3fe47316d2df022d06eda0159ad39ab8c;
+        path=/; secure; HttpOnly
+      Content-Length:
+      - '124'
+      Status:
+      - '503'
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: US-ASCII
+      string: ! '{"message":"Could not create account: Members is invalid, Members
+        is invalid, and Distributor token has already been taken"}'
+    http_version: !!null 
+  recorded_at: Thu, 09 May 2013 11:14:41 GMT
+recorded_with: VCR 2.4.0

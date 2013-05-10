@@ -24,10 +24,17 @@ describe Job do
 
 	  it "should successfully submit a job for processing" do
 	  	server = create(:server)
-	  	job = build(:job)
+	  	job = build(:job_jeffdonthemictest1)
 	  	original_job_id = job.job_id
 	  	logger_account = create(:logger_account_jeffdonthemictest1)
 	  	logger_system = build(:logger_system)
+
+			# delete the test account if it existrs
+	    VCR.use_cassette "models/job/delete_account" do
+	      Papertrail.delete_account(logger_account.name)
+	      logger_account = LoggerAccount.find_by_papertrail_id(logger_account.papertrail_id)
+	      logger_account.destroy if logger_account
+	    end	 
 
       VCR.use_cassette "models/job/submit_success" do
         job.submit
@@ -37,7 +44,14 @@ describe Job do
       job.status.should == 'in progress'
       job.starttime.should_not be_nil
       job.id.should_not be_nil
-      job.job_id.should == original_job_id
+      job.job_id.should == original_job_id 
+
+			# delete the test account if it existrs
+	    VCR.use_cassette "models/job/delete_account_cleanup" do
+	      Papertrail.delete_account(logger_account.name)
+	      logger_account = LoggerAccount.find_by_papertrail_id(logger_account.papertrail_id)
+	      logger_account.destroy if logger_account
+	    end	   
 	  end	  
 
   end  

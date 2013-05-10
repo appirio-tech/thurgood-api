@@ -12,8 +12,18 @@ class LoggerAccount < ActiveRecord::Base
   	self.papertrail_id = SecureRandom.hex unless self.papertrail_id
 	end	
 
+  #
+  # Creates a new account with Papertrail and saves results to db
+  # * *Args*    :
+  # * *Returns* :
+  #   - self
+  # * *Raises* :
+  #   - ++ -> ApiExceptions::ProcessError - if the record is not valid for saving
+  #   - ++ -> ApiExceptions::ProcessError - if Papertrail returned that the 
+  #    account for the 
 	def setup
-		raise ApiExceptions::ProcessError.new "Required fields to create a Logger Account are missing: #{e.errors.full_messages}" if !valid?
+		raise ApiExceptions::ProcessError.new "Error creating Logger Account:
+			#{self.errors.full_messages}" if !valid?
 		pt_account = Hashie::Mash.new Papertrail.create_account(papertrail_id, name, email)
 		if pt_account.has_key?('api_token') 
 			self.papertrail_api_token = pt_account['api_token']

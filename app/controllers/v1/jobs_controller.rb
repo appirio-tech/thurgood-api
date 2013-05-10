@@ -28,7 +28,7 @@ class V1::JobsController < V1::ApplicationController
 		expose Server.find_by_job_id(params[:id])
 	end
 
-	def logger
+	def logger_system
 		job = Job.find_by_job_id(params[:id])
 		expose LoggerSystem.find(job.papertrail_system)
 	end	

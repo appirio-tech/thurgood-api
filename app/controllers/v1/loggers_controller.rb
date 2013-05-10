@@ -3,6 +3,12 @@ class V1::LoggersController < V1::ApplicationController
 
 	before_filter :check_if_account_exists, :only => [:account_create]
 
+	def account_show
+		account = LoggerAccount.find_by_papertrail_id(params[:id])
+		expose account if account
+		error! :not_found, :metadata => {:details => WIKI_LOGGER} if !account			
+	end
+
 	def account_create
 		logger_account = LoggerAccount.new(params[:account]).setup
 		logger_account.save
@@ -15,6 +21,28 @@ class V1::LoggersController < V1::ApplicationController
 	rescue Exception => e
 		error! :server_error, :metadata => 
 			{:error_description => e.message}
+	end
+
+	def account_systems
+		expose LoggerSystem.where("papertrail_account_id = ?", params[:id])
+	end		
+
+	def account_delete
+		Papertrail.delete_account(params[:id])
+		LoggerAccount.find_by_papertrail_id(params[:id]).destroy
+		expose 'true'
+	end	
+
+	def system_show
+		system = LoggerSystem.find_by_papertrail_id(params[:id])
+		expose system if system
+		error! :not_found, :metadata => {:details => WIKI_LOGGER} if !system		
+	end	
+
+	def system_delete
+		Papertrail.delete_system(params[:id])
+		LoggerSystem.find_by_papertrail_id(params[:id]).destroy
+		expose 'true'
 	end
 
 	def system_create

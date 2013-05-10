@@ -10,9 +10,22 @@ class Server < ActiveRecord::Base
 	validates :name, :repo_name, uniqueness: true
 
 	def self.available(language, platform)
-		where("status = ? and languages = ? and platform = ?", "available", language.downcase, platform.downcase).first
+		where("status = ? and languages = ? and platform = ?", "available", 
+			language.downcase, platform.downcase).first
 	end
 
+  #
+  # Marks a server as reserved for a specific job
+  # * *Args*    :
+  #   - job_id -> the id of the job
+  #   - language -> the language for the server being reserved
+  #   - platform -> the platform for the server being reserved
+  # * *Returns* :
+  #   - the record of the server reserved
+  # * *Raises* :
+  #   - ++ -> ApiExceptions::ProcessError - if unable to save record
+  #   - ++ -> ApiExceptions::ServerNotAvailableError - if a server is not available
+  #    for the requested language and type
 	def self.reserve(job_id, language, platform)
 		server = Server.available(language, platform)
 		if server

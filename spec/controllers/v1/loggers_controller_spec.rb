@@ -49,7 +49,7 @@ describe V1::LoggersController do
 		  response.response_code.should == 400
 		  results = JSON.parse(response.body)
 		  results['error'].should == 'bad_request'
-		  results['error_description'].should == "Required fields to create a Logger Account are missing."
+		  results['error_description'].should include("Error creating Logger Account")
 		end
 
 		it "should return 400 and pretty message without account params" do
@@ -67,12 +67,13 @@ describe V1::LoggersController do
 
 		it "should return a new system" do
 
-	  	account = build(:logger_account)
-	  	account.papertrail_id = account.name
+	  	account = create(:logger_account)
+	  	account.papertrail_id = "#{account.name}#{Random.rand(99)}"
       VCR.use_cassette "models/logger_account/create_success" do
         account = account.setup
         account.save
       end
+
 			papertrail_account_id = account.papertrail_id
 			logger_account_id = account.id
 
@@ -82,13 +83,13 @@ describe V1::LoggersController do
 			    params = { :system => {:name => logger_account_id, :papertrail_account_id => papertrail_account_id, 
 			    	:papertrail_id => logger_account_id, :logger_account_id => logger_account_id }}		
 		  end
+		  
 		  response.response_code.should == 200
 		  results = JSON.parse(response.body)['response']
 		  results['syslog_hostname'].should_not be_nil
 		  results['syslog_port'].should_not be_nil
 
 		end
-
 
 	end			
 

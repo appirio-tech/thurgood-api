@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/accounts
+    body:
+      encoding: US-ASCII
+      string: id=jeffdonthemictest1&name=jeffdonthemictest1&user[id]=jeffdonthemictest1&user[email]=jeffdonthemictest1%40cloudspokes.com&plan=free
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 10 May 2013 10:00:00 GMT
+      Server:
+      - Apache/2.2.17 (Fedora)
+      X-Powered-By:
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.17
+      Etag:
+      - ! '"3fc14564344fbdefadcc01e4241b3fb3"'
+      X-Runtime:
+      - '3566'
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlYzYxYmNjZTY0MTFmZGY2MWMyMTE3ZTEzNjA0NjZlZTk%3D--fa6107c8cd40a2a14465c7157f42c5f05cd7583a;
+        path=/; secure; HttpOnly
+      Content-Length:
+      - '162'
+      Status:
+      - '200'
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: US-ASCII
+      string: ! '{"log_data_transfer":0,"log_data_transfer_limit":104857600,"api_token":"QD5OJMF7DeE4Pk1fVIJk","name":"jeffdonthemictest1","plan":"free","id":"jeffdonthemictest1"}'
+    http_version: !!null 
+  recorded_at: Fri, 10 May 2013 10:00:04 GMT
+- request:
+    method: post
+    uri: https://cloudspokes:239f45c2eu4d709m3c56684e827508d6@papertrailapp.com/api/v1/distributors/systems
+    body:
+      encoding: US-ASCII
+      string: id=111111111&name=jeffdonthemictest1-111111111&account_id=jeffdonthemictest1
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 10 May 2013 10:00:04 GMT
+      Server:
+      - Apache/2.2.17 (Fedora)
+      X-Powered-By:
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.17
+      Etag:
+      - ! '"f4989c45d20bbbe7adb7268b349699ba"'
+      X-Runtime:
+      - '2782'
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - _papertrail_session=BAh7BjoPc2Vzc2lvbl9pZCIlYzY2MjRjYTBhZmM2M2Y0NTBkOWEwYjYxMzgxOGM5YTI%3D--cdfbde0951f6b412caaae3fb53211736ef4fea91;
+        path=/; secure; HttpOnly
+      Content-Length:
+      - '127'
+      Status:
+      - '200'
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: US-ASCII
+      string: ! '{"syslog_port":63827,"name":"jeffdonthemictest1-111111111","id":"111111111","syslog_hostname":"cloudspokes1.papertrailapp.com"}'
+    http_version: !!null 
+  recorded_at: Fri, 10 May 2013 10:00:07 GMT
+recorded_with: VCR 2.4.0

@@ -5,12 +5,11 @@ describe LoggerAccount do
   describe "'Create' account" do
 	  it "should return a friendly error if fields are missing" do
 	  	account = LoggerAccount.new
-      expect { account.setup }.to raise_error ApiExceptions::ProcessError, 
-	      'Required fields to create a Logger Account are missing.'
+      expect { account.setup }.to raise_error ApiExceptions::ProcessError
 	  end
 
 	  it "should return a friendly error if the pt account already exists" do
-	  	account = build(:logger_account)
+	  	account = build(:logger_account_jeffdonthemic)
 	  	account.papertrail_id = account.name
       VCR.use_cassette "models/logger_account/create_existing" do
 	      expect { account.setup }.to raise_error ApiExceptions::ProcessError, 
@@ -27,6 +26,12 @@ describe LoggerAccount do
       end
       account.papertrail_api_token.should_not be_nil
       account.papertrail_id.should == account.name
+
+			# delete the newly created account now
+      VCR.use_cassette "models/logger_account/delete_account" do
+        Papertrail.delete_account(account.papertrail_id)
+      end			
+
 	  end
 
   end  

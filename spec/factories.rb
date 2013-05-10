@@ -30,8 +30,8 @@ FactoryGirl.define do
     end
 
     factory :logger_account_jeffdonthemictest1 do
-      email "jeff@cloudspokes.com"
-      name 'jeffdonthemic'
+      email "jeffdonthemictest1@cloudspokes.com"
+      name 'jeffdonthemictest1'
       papertrail_id 'jeffdonthemictest1'
     end    
 
@@ -50,6 +50,13 @@ FactoryGirl.define do
     platform 'salesforce.com'
     job_id '123456abcd'
     code_url 'http://www.cloudspokes.com/some-file.zip'
+
+    factory :job_jeffdonthemictest1 do
+      user_id 'jeffdonthemictest1'
+      email 'jeffdonthemictest1@cloudspokes.com'
+      job_id '111111111'
+    end
+
   end 
 
 end

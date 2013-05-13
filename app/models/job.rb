@@ -1,3 +1,5 @@
+require 'bunny'
+
 class Job < ActiveRecord::Base
 	before_save :default_values
 
@@ -26,13 +28,28 @@ class Job < ActiveRecord::Base
 		self.status = 'in progress'
 		self.starttime = DateTime.now
 		if self.save
-			# TODO -- kick off the job to thrugood-queue
+			publish_job
 		else
 			raise ApiExceptions::ProcessError.new "Error! Could not submit job: #{self.errors.full_messages}"			
 		end
+		# temp
+		server.release
 	end
 
 	private
+
+		def publish_job
+			
+			message = { :url => self.code_url, :type => self.language, :membername => self.user_id, 
+				:challenge_participant => '1', :challenge_id => '2'}		
+
+			b = Bunny.new ENV['CLOUDAMQP_URL']
+			b.start
+			q = b.queue(ENV['SQUIRRELFORCE_QUEUE'])
+			q.publish(message.to_json)
+			b.stop			
+
+		end
 
 		def check_for_previously_submitted_job
 			raise ApiExceptions::ProcessError.new "Job has already been submitted for processing" if self.starttime

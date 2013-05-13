@@ -4,6 +4,7 @@ gem 'rails', '3.2.12'
 
 gem 'rocket_pants', '~> 1.0'
 gem 'pg'
+gem 'bunny'
 gem 'unicorn'
 gem 'httparty'
 gem 'hashie', '1.2.0'

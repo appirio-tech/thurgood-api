@@ -33,7 +33,7 @@ class Job < ActiveRecord::Base
 			raise ApiExceptions::ProcessError.new "Error! Could not submit job: #{self.errors.full_messages}"			
 		end
 		# temp
-		server.release
+		Server.release(server.id)
 	end
 
 	private
@@ -48,7 +48,6 @@ class Job < ActiveRecord::Base
 			q = b.queue(ENV['SQUIRRELFORCE_QUEUE'])
 			q.publish(message.to_json)
 			b.stop			
-
 		end
 
 		def check_for_previously_submitted_job

@@ -17,7 +17,8 @@ class Job < ActiveRecord::Base
 	end
 
 	# raises ServerNotAvailableError if servers by language and platform not available
-	def submit
+	def submit(system_papertrail_id=nil)
+		@system_papertrail_id = system_papertrail_id if system_papertrail_id
 		check_for_previously_submitted_job
 		server = Server.reserve(job_id, language, platform)
 		setup_logger_account
@@ -27,16 +28,14 @@ class Job < ActiveRecord::Base
 		if self.save
 			# TODO -- kick off the job to thrugood-queue
 		else
-			raise ApiExceptions::ProcessError.new "Error! Could not submit job: 
-				#{self.errors.full_messages}"			
+			raise ApiExceptions::ProcessError.new "Error! Could not submit job: #{self.errors.full_messages}"			
 		end
 	end
 
 	private
 
 		def check_for_previously_submitted_job
-			raise ApiExceptions::ProcessError.new "Job has already been submitted for 
-				processing" if self.starttime
+			raise ApiExceptions::ProcessError.new "Job has already been submitted for processing" if self.starttime
 		end
 
 		# @account.setup raises ProcessError if not able to setup the account with papertrail
@@ -46,19 +45,21 @@ class Job < ActiveRecord::Base
 				@account = LoggerAccount.new(:name => self.user_id, :email => self.email, 
 					:papertrail_id => self.user_id)
 				@account.setup
-				raise ApiExceptions::ProcessError.new "Could not create logger 
-					account: #{@account.errors.full_messages}" if !@account.save
+				raise ApiExceptions::ProcessError.new "Could not create logger account: #{@account.errors.full_messages}" if !@account.save
 			end
 		rescue Exception => e
 			raise ApiExceptions::ProcessError.new "Error creating logger account: #{e.message}"
 		end
 
 		def setup_logger_system
-      system_logger = LoggerSystem.new :name => "#{self.user_id}-#{self.job_id}", :papertrail_id => self.job_id,
-      	:papertrail_account_id => @account.papertrail_id, :logger_account_id => @account.id	
+			system_papertrail_id = self.job_id
+			system_papertrail_id = @system_papertrail_id if @system_papertrail_id
+      system_logger = LoggerSystem.new :name => "#{self.user_id}-#{self.job_id}", 
+	      :papertrail_id => system_papertrail_id, :papertrail_account_id => @account.papertrail_id, 
+	      :logger_account_id => @account.id	
+	    puts "system_logger #{system_logger.to_yaml}"
       system_logger.setup # create the system in papertrail
-			raise ApiExceptions::ProcessError.new "Could not create logger 
-				system: #{system_logger.errors.full_messages}" if !system_logger.save 
+			raise ApiExceptions::ProcessError.new "Could not create logger system: #{system_logger.errors.full_messages}" if !system_logger.save 
 			self.papertrail_system =  system_logger.id   
 		rescue Exception => e
 			raise ApiExceptions::ProcessError.new "Error creating logger system: #{e.message}"			

@@ -9,22 +9,6 @@ describe V1::LoggersController do
 
 	describe "'Create' account" do
 
-		it "should return a new account without papertrail_id" do
-	  	name = 'test-rails2'
-	  	email = 'test-rails2@cloudspokes.com'
-
-	    request.env['Authorization'] = 'Token token="'+@api_key+'"'
-	    VCR.use_cassette "controllers/v1/loggers_controller/create_success" do
-		    post 'account_create', 
-			    params = { :account => {:name => name, :email => email }}	
-		  end
-		  response.response_code.should == 200	
-			results = JSON.parse(response.body)['response']
-			results['name'].should == name
-			results['email'].should == email
-			results['papertrail_id'].should_not be_blank
-		end
-
 		it "should return a new account with a specified papertrail_id" do
 	  	name = 'somename'
 	  	email = 'some@email.com'

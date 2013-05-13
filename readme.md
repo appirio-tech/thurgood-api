@@ -28,7 +28,7 @@ curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POS
 
 Logger System
 
-curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"system": {"name": "mysystem",  "logger_account_id": "4"}}'  http://localhost:3000/v1/loggers/system/create
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"system": {"name": "mysystem",  "logger_account_id": "13", "papertrail_account_id": "jeffdonthemic"}}'  http://localhost:3000/v1/loggers/system/create
 
 Delete System
 

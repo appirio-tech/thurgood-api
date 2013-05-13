@@ -12,8 +12,7 @@ class LoggerSystem < ActiveRecord::Base
 	end	  
 
 	def setup
-		raise ApiExceptions::ProcessError.new "Required fields to create a Logger System are 
-			missing: #{self.errors.full_messages}" if !valid?
+		raise ApiExceptions::ProcessError.new "Required fields to create a Logger System are missing: #{self.errors.full_messages}" if !valid?
 		pt_system = Hashie::Mash.new Papertrail.create_system(papertrail_id, name, papertrail_account_id)
 		if pt_system.has_key?('syslog_hostname') 
 			self.syslog_port = pt_system['syslog_port']

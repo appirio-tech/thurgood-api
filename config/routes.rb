@@ -15,7 +15,7 @@ ThurgoodApi::Application.routes.draw do
 
     resources :servers, only: [:index, :show]
 
-    get 'servers/:id/release',            to: 'servers#release'
+    get 'servers/:id/release',            to: 'servers#release' # not yet implemented
 
     post 'loggers/account/create',        to: 'loggers#account_create'
     post 'loggers/system/create',         to: 'loggers#system_create'

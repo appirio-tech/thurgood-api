@@ -23,14 +23,17 @@ class V1::LoggersController < V1::ApplicationController
 			{:error_description => e.message}
 	end
 
-	def account_systems
-		expose LoggerSystem.where("papertrail_account_id = ?", params[:id])
-	end		
-
 	def account_delete
 		Papertrail.delete_account(params[:id])
 		LoggerAccount.find_by_papertrail_id(params[:id]).destroy
 		expose 'true'
+	rescue Exception => e
+		error! :server_error, :metadata => 
+			{:error_description => 'Error deleting Account.'}
+	end	
+
+	def account_systems
+		expose LoggerSystem.where("papertrail_account_id = ?", params[:id])
 	end	
 
 	def system_show
@@ -43,6 +46,9 @@ class V1::LoggersController < V1::ApplicationController
 		Papertrail.delete_system(params[:id])
 		LoggerSystem.find_by_papertrail_id(params[:id]).destroy
 		expose 'true'
+	rescue Exception => e
+		error! :server_error, :metadata => 
+			{:error_description => 'Error deleting System.'}		
 	end
 
 	def system_create
@@ -62,7 +68,7 @@ class V1::LoggersController < V1::ApplicationController
 	private
 
 		def check_if_account_exists
-			existing_account = LoggerAccount.find_by_email(params[:account][:email])
+			existing_account = LoggerAccount.find_by_papertrail_id(params[:account][:papertrail_id])
 			expose existing_account if existing_account
 		rescue Exception => e
 			error! :bad_request, :metadata => 

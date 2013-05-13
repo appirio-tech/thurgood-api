@@ -2,7 +2,7 @@ class V1::JobsController < V1::ApplicationController
 	jsonp	
 
 	def index
-	 expose Job.order("created_at DESC").all
+	 expose Job.order("created_at DESC").limit(25)
 	end
 
 	def create
@@ -39,7 +39,7 @@ class V1::JobsController < V1::ApplicationController
 
 	def submit
 		job = Job.find_by_job_id(params[:id])
-		job.submit
+		job.submit(params[:system_papertrail_id])
 		expose job
 	rescue Exception => e
 		error! :bad_request, :metadata => {:error_description => e.message}		

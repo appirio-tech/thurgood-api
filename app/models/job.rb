@@ -45,7 +45,7 @@ class Job < ActiveRecord::Base
 
 			b = Bunny.new ENV['CLOUDAMQP_URL']
 			b.start
-			q = b.queue(ENV['SQUIRRELFORCE_QUEUE'])
+			q = b.queue(ENV['THURGOOD_MAIN_QUEUE'])
 			q.publish(message.to_json)
 			b.stop			
 		end

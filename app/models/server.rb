@@ -41,4 +41,9 @@ class Server < ActiveRecord::Base
 		end
 	end
 
+	def self.release
+  	self.status = 'available'
+  	self.save
+	end
+
 end

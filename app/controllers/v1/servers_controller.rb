@@ -15,8 +15,7 @@ class V1::ServersController < V1::ApplicationController
 
   def release
   	server = Server.find(params[:id])
-  	server.status = 'available'
-  	server.save
+    server.release
     expose server
   end  
 

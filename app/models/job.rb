@@ -40,6 +40,19 @@ class Job < ActiveRecord::Base
 		Server.release(server.id)
 	end
 
+	def resubmit
+		server = Server.reserve(job_id, language, platform)
+		self.status = 'in progress'
+		self.starttime = DateTime.now
+		if self.save
+			publish_job
+		else
+			raise ApiExceptions::ProcessError.new "Error! Could not resubmit job: #{self.errors.full_messages}"			
+		end
+		# temp
+		Server.release(server.id)
+	end	
+
 	private
 
 		def job_options(options)

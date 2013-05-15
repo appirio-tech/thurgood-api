@@ -7,6 +7,7 @@ ThurgoodApi::Application.routes.draw do
     resources :jobs, only: [:index, :create, :show]
 
     put 'jobs/:id/submit',                to: 'jobs#submit'
+    get 'jobs/:id/resubmit',                to: 'jobs#resubmit'
     get 'jobs/:id/server',                to: 'jobs#server'
     get 'jobs/:id/logger',                to: 'jobs#logger_system'
 

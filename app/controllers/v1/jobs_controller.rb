@@ -45,4 +45,12 @@ class V1::JobsController < V1::ApplicationController
 		error! :bad_request, :metadata => {:error_description => e.message}		
 	end
 
+	def resubmit
+		job = Job.find_by_job_id(params[:id])
+		job.resubmit
+		expose job
+	rescue Exception => e
+		error! :bad_request, :metadata => {:error_description => e.message}		
+	end	
+
 end

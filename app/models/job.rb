@@ -5,7 +5,9 @@ class Job < ActiveRecord::Base
 
   attr_accessible :email, :endtime, :job_id, :language, :user_id,
   	:papertrail_system, :platform, :starttime, :status, :server_id,
-  	:code_url
+  	:code_url, :options
+
+  serialize :options, JSON
 
 	validates :user_id, :code_url, :language, :platform, presence: true 
 
@@ -18,15 +20,17 @@ class Job < ActiveRecord::Base
   	self.job_id = SecureRandom.hex if !self.job_id
 	end
 
-	# raises ServerNotAvailableError if servers by language and platform not available
-	def submit(system_papertrail_id=nil)
-		@system_papertrail_id = system_papertrail_id if system_papertrail_id
+	def submit(options)
+		if options
+			@system_papertrail_id = options[:system_papertrail_id] if options[:system_papertrail_id]
+		end
 		check_for_previously_submitted_job
 		server = Server.reserve(job_id, language, platform)
 		setup_logger_account
 		setup_logger_system
 		self.status = 'in progress'
 		self.starttime = DateTime.now
+		self.options = job_options(options) if options
 		if self.save
 			publish_job
 		else
@@ -38,11 +42,14 @@ class Job < ActiveRecord::Base
 
 	private
 
-		def publish_job
-			
-			message = { :url => self.code_url, :type => self.language, :membername => self.user_id, 
-				:challenge_participant => '1', :challenge_id => '2'}		
+		def job_options(options)
+			options = options.to_hash
+			options.remove_key!('system_papertrail_id')
+			options.to_json
+		end
 
+		def publish_job
+			message = { :job_id => self.job_id, :type => self.language }		
 			b = Bunny.new ENV['CLOUDAMQP_URL']
 			b.start
 			q = b.queue(ENV['THURGOOD_MAIN_QUEUE'])

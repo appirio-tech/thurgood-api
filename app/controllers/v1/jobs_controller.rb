@@ -39,7 +39,7 @@ class V1::JobsController < V1::ApplicationController
 
 	def submit
 		job = Job.find_by_job_id(params[:id])
-		job.submit(params[:system_papertrail_id])
+		job.submit(params[:options])
 		expose job
 	rescue Exception => e
 		error! :bad_request, :metadata => {:error_description => e.message}		

@@ -44,7 +44,7 @@ class Job < ActiveRecord::Base
 
 		def job_options(options)
 			options = options.to_hash
-			options.remove_key!('system_papertrail_id')
+			options.remove_key!('system_papertrail_id') if options[:system_papertrail_id]
 			options.to_json
 		end
 

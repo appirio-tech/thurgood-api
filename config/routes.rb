@@ -2,17 +2,17 @@ ThurgoodApi::Application.routes.draw do
 
   namespace :v1 do
 
-  	get 'jobs/by_user/:user_id', to: 'jobs#by_user'
+    get 'jobs/by_user/:user_id', to: 'jobs#by_user'
 
     resources :jobs, only: [:index, :create, :show]
 
     put 'jobs/:id/submit',                to: 'jobs#submit'
-    get 'jobs/:id/resubmit',                to: 'jobs#resubmit'
+    get 'jobs/:id/resubmit',              to: 'jobs#resubmit'
     get 'jobs/:id/server',                to: 'jobs#server'
     get 'jobs/:id/logger',                to: 'jobs#logger_system'
 
-  	get 'servers/reserved',               to: 'servers#by_status', :status => 'reserved'
-  	get 'servers/available',              to: 'servers#by_status', :status => 'available'
+    get 'servers/reserved',               to: 'servers#by_status', :status => 'reserved'
+    get 'servers/available',              to: 'servers#by_status', :status => 'available'
 
     resources :servers, only: [:index, :show]
 

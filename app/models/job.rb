@@ -20,6 +20,14 @@ class Job < ActiveRecord::Base
   	self.job_id = SecureRandom.hex if !self.job_id
 	end
 
+	def send_to_logger(msg, program)
+		logger_system = LoggerSystem.find(papertrail_system)
+		logger = RemoteSyslogLogger.new('logs.papertrailapp.com', logger_system.syslog_port, 
+			:local_hostname => logger_system.papertrail_id, 
+			:program => program)
+		 logger.info msg
+	end
+
 	def submit(options)
 		if options
 			@system_papertrail_id = options[:system_papertrail_id] if options[:system_papertrail_id]

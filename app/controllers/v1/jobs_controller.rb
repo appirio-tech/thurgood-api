@@ -53,4 +53,12 @@ class V1::JobsController < V1::ApplicationController
 		error! :bad_request, :metadata => {:error_description => e.message}		
 	end	
 
+	def message
+		job = Job.find_by_job_id(params[:id])
+		job.send_to_logger(params[:message][:text], params[:message][:sender])
+		expose 'true'
+	rescue Exception => e
+		error! :bad_request, :metadata => {:error_description => e.message}		
+	end		
+
 end

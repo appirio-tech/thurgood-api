@@ -10,6 +10,7 @@ ThurgoodApi::Application.routes.draw do
     get 'jobs/:id/resubmit',              to: 'jobs#resubmit'
     get 'jobs/:id/server',                to: 'jobs#server'
     get 'jobs/:id/logger',                to: 'jobs#logger_system'
+    post 'jobs/:id/message',              to: 'jobs#message'
 
     get 'servers/reserved',               to: 'servers#by_status', :status => 'reserved'
     get 'servers/available',              to: 'servers#by_status', :status => 'available'

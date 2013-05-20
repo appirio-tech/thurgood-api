@@ -8,6 +8,7 @@ gem 'bunny'
 gem 'unicorn'
 gem 'httparty'
 gem 'hashie', '1.2.0'
+gem 'remote_syslog_logger'
 
 group :development, :test do
 	gem 'sextant'

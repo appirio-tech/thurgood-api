@@ -16,10 +16,10 @@ class V1::ApplicationController < RocketPants::Base
 
   private
 
-  	# this is only for ease of development
-  	def add_api_key
-  		request.env['Authorization'] = 'Token token="' + ApiKey.first.access_key + '"'
-  	end
+  	# # this is only for ease of development
+  	# def add_api_key
+  	# 	request.env['Authorization'] = 'Token token="' + ApiKey.first.access_key + '"'
+  	# end
 
     # parses the api_key from the Authorization request header:
     # request.env['Authorization'] = 'Token token="THIS-IS-MY-TOKEN"'

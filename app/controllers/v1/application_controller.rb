@@ -1,6 +1,6 @@
 class V1::ApplicationController < RocketPants::Base
 
-	before_filter :add_api_key # testing for dev
+	# before_filter :add_api_key # testing for dev
 	before_filter :restrict_access
 
   WIKI_LOGGER = 'https://github.com/cloudspokes/thurgood-api/wiki/Logger'

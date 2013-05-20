@@ -32,6 +32,8 @@ class V1::ApplicationController < RocketPants::Base
         end
       end
       token
+    else 
+      puts '======= No API Token passed'
     end  	
 
 end

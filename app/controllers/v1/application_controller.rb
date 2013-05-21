@@ -24,16 +24,20 @@ class V1::ApplicationController < RocketPants::Base
     # parses the api_key from the Authorization request header:
     # request.env['Authorization'] = 'Token token="THIS-IS-MY-TOKEN"'
     def api_key_from_header
-      token = ''
+      token = nil
       if request.headers['Authorization']
         begin 
+          puts "======1 : #{request.headers['Authorization'].split('=')}"
+          puts "======2 : #{request.headers['Authorization'].split('=').second}"
+          puts "======3 : #{request.headers['Authorization'].split('=')[1]}"
+          puts "======3 : #{request.headers['Authorization'].split('=').second.gsub('"','')}"
           token = request.headers['Authorization'].split('=').second.gsub('"','')
-        rescue
+        rescue Exception => e
+          puts "exception: #{e.message}"
         end
       end
+      puts "[FATAL]No API Token passed." unless token
       token
-    else 
-      puts '======= No API Token passed'
     end  	
 
 end

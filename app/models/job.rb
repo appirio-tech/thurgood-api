@@ -26,6 +26,8 @@ class Job < ActiveRecord::Base
 			:local_hostname => logger_system.papertrail_id, 
 			:program => program)
 		 logger.info msg
+	rescue Exception => e
+		Rails.logger.info "[INFO] Could not find log sender for Job #{self.job_id} to send message to."
 	end
 
 	def submit(options)

@@ -58,7 +58,7 @@ class V1::JobsController < V1::ApplicationController
 		job.send_to_logger(params[:message][:text], params[:message][:sender])
 		expose 'true'
 	rescue Exception => e
-		error! :bad_request, :metadata => {:error_description => e.message}		
+		error! :bad_request, :metadata => {:error_description => e.message, :details => WIKI_LOGGER}		
 	end		
 
 end

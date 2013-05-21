@@ -72,12 +72,16 @@ class Job < ActiveRecord::Base
 		end
 
 		def publish_job
-			message = { :job_id => self.job_id, :type => self.language }		
-			b = Bunny.new ENV['CLOUDAMQP_URL']
-			b.start
-			q = b.queue(ENV['THURGOOD_MAIN_QUEUE'])
-			q.publish(message.to_json)
-			b.stop			
+			if ENV['CLOUDAMQP_URL']
+				message = { :job_id => self.job_id, :type => self.language }		
+				b = Bunny.new ENV['CLOUDAMQP_URL']
+				b.start
+				q = b.queue(ENV['THURGOOD_MAIN_QUEUE'])
+				q.publish(message.to_json)
+				b.stop			
+			else
+				Rails.logger.info "[INFO] Job not submitted to queue. Not AMQP URL present."	
+			end
 		end
 
 		def check_for_previously_submitted_job

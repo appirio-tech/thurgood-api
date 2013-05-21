@@ -11,7 +11,7 @@ module Papertrail
     }
 
     results = HTTParty.get("https://papertrailapp.com/api/v1/distributors/accounts/#{id}", options)
-    puts "[DEBUG] Get Papertrail account: #{results.to_yaml}"
+    Rails.logger.debug "[DEBUG][PT] Get Papertrail account: #{results.to_yaml}"
     results
 
   end
@@ -42,9 +42,9 @@ module Papertrail
   		:basic_auth => auth 
   	}
 
-    puts "[DEBUG] Creating new Papertrail account with opions: #{options}"
+    Rails.logger.debug "[DEBUG][PT] Creating new Papertrail account with opions: #{options}"
   	results = HTTParty.post("https://papertrailapp.com/api/v1/distributors/accounts", options)
-    puts "[DEBUG] New Papertrail account: #{results.to_yaml}"
+    Rails.logger.debug "[DEBUG][PT] New Papertrail account: #{results.to_yaml}"
     results
 
   end
@@ -60,9 +60,9 @@ module Papertrail
       :basic_auth => auth 
     }   
 
-    puts "[DEBUG] Deleting Papertrail account #{id}"
+    Rails.logger.debug "[DEBUG][PT] Deleting Papertrail account #{id}"
     results = HTTParty.delete("https://papertrailapp.com/api/v1/distributors/accounts/#{id}", options)
-    puts "[DEBUG] Papertrail account deleted: #{results.to_yaml}"
+    Rails.logger.debug "[DEBUG][PT] Papertrail account deleted: #{results.to_yaml}"
     results       
 
   end  
@@ -86,9 +86,9 @@ module Papertrail
   		:basic_auth => auth 
   	}  	
 
-    puts "[DEBUG] Creating new Papertrail system with options: #{options}"
+    Rails.logger.debug "[DEBUG][PT] Creating new Papertrail system with options: #{options}"
   	results = HTTParty.post("https://papertrailapp.com/api/v1/distributors/systems", options)
-    puts "[DEBUG] New Papertrail system: #{results.to_yaml}"
+    Rails.logger.debug "[DEBUG][PT] New Papertrail system: #{results.to_yaml}"
     results    
 
   end  
@@ -104,9 +104,9 @@ module Papertrail
       :basic_auth => auth 
     }   
 
-    puts "[DEBUG] Deleting Papertrail system with options: #{options}"
+    Rails.logger.debug "[DEBUG][PT] Deleting Papertrail system with options: #{options}"
     results = HTTParty.delete("https://papertrailapp.com/api/v1/distributors/systems/#{id}", options)
-    puts "[DEBUG] Papertrail system deleted: #{results.to_yaml}"
+    Rails.logger.debug "[DEBUG][PT] Papertrail system deleted: #{results.to_yaml}"
     results       
 
   end

@@ -101,7 +101,6 @@ class Job < ActiveRecord::Base
       system_logger = LoggerSystem.new :name => "#{self.user_id}-#{self.job_id}", 
 	      :papertrail_id => system_papertrail_id, :papertrail_account_id => @account.papertrail_id, 
 	      :logger_account_id => @account.id	
-	    puts "system_logger #{system_logger.to_yaml}"
       system_logger.setup # create the system in papertrail
 			raise ApiExceptions::ProcessError.new "Could not create logger system: #{system_logger.errors.full_messages}" if !system_logger.save 
 			self.papertrail_system =  system_logger.id   

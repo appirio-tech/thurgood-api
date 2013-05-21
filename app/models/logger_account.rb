@@ -20,7 +20,7 @@ class LoggerAccount < ActiveRecord::Base
 		pt_account = Papertrail.get_account(papertrail_id) if !pt_account.has_key?('api_token') 
 		self.papertrail_api_token = pt_account['api_token']
 		self.papertrail_id = pt_account['id']
-		puts "Error inserting existing account into DB" if !self.save
+		Rails.logger.fatal "[FATAL] Error inserting existing Papertrail account into DB" if !self.save
 		self		
 	end
 end

@@ -38,7 +38,7 @@ class V1::JobsController < V1::ApplicationController
 	end
 
 	def submit
-		logger.info "submitting new job with params: #{params[:options]}"
+		puts "submitting new job with params: #{params[:options]}"
 		job = Job.find_by_job_id(params[:id])
 		job.submit(params[:options])
 		expose job

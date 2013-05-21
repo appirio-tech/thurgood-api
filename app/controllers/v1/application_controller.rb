@@ -29,10 +29,10 @@ class V1::ApplicationController < RocketPants::Base
         begin 
           token = request.headers['Authorization'].split('=').second.gsub('"','')
         rescue Exception => e
-          puts "Exception parsing header api token: #{e.message}"
+          logger.info "[FATAL] Exception parsing header api token: #{e.message}"
         end
       end
-      puts "[FATAL]No API Token passed." unless token
+      logger.fatal "[FATAL] No API Token passed." unless token
       token
     end  	
 

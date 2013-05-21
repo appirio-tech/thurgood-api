@@ -27,13 +27,9 @@ class V1::ApplicationController < RocketPants::Base
       token = nil
       if request.headers['Authorization']
         begin 
-          puts "======1 : #{request.headers['Authorization'].split('=')}"
-          puts "======2 : #{request.headers['Authorization'].split('=').second}"
-          puts "======3 : #{request.headers['Authorization'].split('=')[1]}"
-          puts "======3 : #{request.headers['Authorization'].split('=').second.gsub('"','')}"
           token = request.headers['Authorization'].split('=').second.gsub('"','')
         rescue Exception => e
-          puts "exception: #{e.message}"
+          puts "Exception parsing header api token: #{e.message}"
         end
       end
       puts "[FATAL]No API Token passed." unless token

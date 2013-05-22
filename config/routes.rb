@@ -10,14 +10,13 @@ ThurgoodApi::Application.routes.draw do
     get 'jobs/:id/resubmit',              to: 'jobs#resubmit'
     get 'jobs/:id/server',                to: 'jobs#server'
     get 'jobs/:id/logger',                to: 'jobs#logger_system'
-    post 'jobs/:id/message',               to: 'jobs#message'
+    get 'jobs/:id/complete',              to: 'jobs#complete'
+    post 'jobs/:id/message',              to: 'jobs#message'
 
     get 'servers/reserved',               to: 'servers#by_status', :status => 'reserved'
     get 'servers/available',              to: 'servers#by_status', :status => 'available'
 
     resources :servers, only: [:index, :show]
-
-    get 'servers/:id/release',            to: 'servers#release' # not yet implemented
 
     post 'loggers/account/create',        to: 'loggers#account_create'
     post 'loggers/system/create',         to: 'loggers#system_create'

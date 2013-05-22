@@ -13,10 +13,4 @@ class V1::ServersController < V1::ApplicationController
     expose Server.find(params[:id])
   end
 
-  def release
-  	server = Server.find(params[:id])
-    server.release
-    expose server
-  end  
-
 end

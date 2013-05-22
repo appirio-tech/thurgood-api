@@ -63,9 +63,13 @@ class V1::JobsController < V1::ApplicationController
 
 	def complete
   	server = Server.find_by_job_id(params[:id])
+  	Rails.logger.debug server.to_yaml
   	error! :not_found, :metadata => {:error_description => 'Server not found for requested job.'}
+  	Rails.logger.debug "no errors so far"
   	if server
+  		Rails.logger.debug "releasing"
 	    server.release
+	    Rails.logger.debug "done releaseing"
 	    expose 'true'  
 	  end
 	end	

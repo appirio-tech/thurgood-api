@@ -31,32 +31,21 @@ class Job < ActiveRecord::Base
 	end
 
 	def submit(options)
-		Rails.logger.info "[INFO] 1"
 		if options
-			Rails.logger.info "[INFO] 2"
 			@system_papertrail_id = options[:system_papertrail_id] if options[:system_papertrail_id]
 		end
-		Rails.logger.info "[INFO] 3"
 		check_for_previously_submitted_job
-		Rails.logger.info "[INFO] 4"
 		server = Server.reserve(job_id, language, platform)
-		Rails.logger.info "[INFO] 5"
 		setup_logger_account
-		Rails.logger.info "[INFO] 6"
 		setup_logger_system
-		Rails.logger.info "[INFO] 7"
 		self.status = 'in progress'
 		self.starttime = DateTime.now
 		self.options = job_options(options) if options
-		Rails.logger.info "[INFO] 7"
 		if self.save
-			Rails.logger.info "[INFO] 8"
 			publish_job
 		else
-			Rails.logger.info "[INFO] 9"
 			raise ApiExceptions::ProcessError.new "Error! Could not submit job: #{self.errors.full_messages}"			
 		end
-		Rails.logger.info "[INFO] 10"
 		# temp
 		Server.release(server.id)
 	end
@@ -91,7 +80,7 @@ class Job < ActiveRecord::Base
 				q.publish(message.to_json)
 				b.stop			
 			else
-				Rails.logger.info "[INFO] Job not submitted to queue. Not AMQP URL present."	
+				Rails.logger.info "[INFO] Job not submitted to queue. Not AMQP URL pre"	
 			end
 		end
 
@@ -114,20 +103,13 @@ class Job < ActiveRecord::Base
 
 		def setup_logger_system
 			system_papertrail_id = self.job_id
-			Rails.logger.info "system_papertrail_id: #{system_papertrail_id}"
 			system_papertrail_id = @system_papertrail_id if @system_papertrail_id
-			Rails.logger.info "system_papertrail_id: #{system_papertrail_id}"
       system_logger = LoggerSystem.new :name => "#{self.user_id}-#{self.job_id}", 
 	      :papertrail_id => system_papertrail_id, :papertrail_account_id => @account.papertrail_id, 
 	      :logger_account_id => @account.id	
-	    Rails.logger.info "system_logger: #{system_logger.to_yaml}"
       system_logger.setup # create the system in papertrail
-			if !system_logger.save
-				Rails.logger.info "Could not create logger system: #{system_logger.errors.full_messages}" 
-				raise ApiExceptions::ProcessError.new "Could not create logger system: #{system_logger.errors.full_messages}" 
-			end
-			Rails.logger.info "system_logger.id #{system_logger.id}"
-			self.papertrail_system =  system_logger.id   
+			raise ApiExceptions::ProcessError.new "Could not create logger system: #{system_logger.errors.full_messages}" if !system_logger.save 
+			self.papertrail_system = system_logger.id   
 		rescue Exception => e
 			raise ApiExceptions::ProcessError.new "Error creating logger system: #{e.message}"			
 		end

@@ -41,11 +41,10 @@ class Server < ActiveRecord::Base
 		end
 	end
 
-	def self.release(id)
-		server = Server.find(id)
-  	server.status = 'available'
-  	server.job_id = ''
-  	server.save
+	def release
+  	self.status = 'available'
+  	self.job_id = ''
+  	save
 	end
 
 end

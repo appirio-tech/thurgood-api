@@ -63,10 +63,11 @@ class V1::JobsController < V1::ApplicationController
 
 	def complete
   	server = Server.find_by_job_id(params[:id])
-    server.release
-    expose 'true'
-	rescue Exception => e
-		error! :server_error, :metadata => {:error_description => 'Error releasing server.'}		    
+  	error! :not_found, :metadata => {:error_description => 'Server not found for requested job.'}
+  	if server
+	    server.release
+	    expose 'true'  
+	  end
 	end	
 
 end

@@ -62,8 +62,10 @@ class V1::JobsController < V1::ApplicationController
 	end		
 
 	def complete
+		job = Job.find(params[:id])
+		job.status = 'complete'
+		job.save
   	server = Server.find_by_job_id(params[:id])
-  	error! :not_found, :metadata => {:error_description => 'Server not found for requested job.'} if !server
   	if server
 	    server.release
 	    expose 'true'  

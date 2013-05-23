@@ -62,7 +62,7 @@ class V1::JobsController < V1::ApplicationController
 	end		
 
 	def complete
-		job = Job.find(params[:id])
+		job = Job.find_by_job_id(params[:id])
 		job.status = 'complete'
 		job.save
   	server = Server.find_by_job_id(params[:id])

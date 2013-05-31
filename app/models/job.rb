@@ -34,16 +34,23 @@ class Job < ActiveRecord::Base
     if options
       @system_papertrail_id = options[:system_papertrail_id] if options[:system_papertrail_id]
     end
+    Rails.logger.info "[INFO] Checking for previously submitted job"
     check_for_previously_submitted_job
+    Rails.logger.info "[INFO] Reserving server"
     server = Server.reserve(job_id, language, platform)
+    Rails.logger.info "[INFO] Setting up logger account"
     setup_logger_account
+    Rails.logger.info "[INFO] Setting up logger system"
     setup_logger_system
     self.status = 'in progress'
     self.starttime = DateTime.now
     self.options = job_options(options) if options
+    Rails.logger.info "[INFO] Setting up job"
     if self.save
+      Rails.logger.info "[INFO] Saving and publishing job: #{self}"
       publish_job
     else
+      Rails.logger.info "[INFO] Error! Could not submit job: #{self.errors.full_messages}"
       raise ApiExceptions::ProcessError.new "Error! Could not submit job: #{self.errors.full_messages}"			
     end
     # temp

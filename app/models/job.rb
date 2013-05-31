@@ -53,8 +53,6 @@ class Job < ActiveRecord::Base
       Rails.logger.info "[INFO] Error! Could not submit job: #{self.errors.full_messages}"
       raise ApiExceptions::ProcessError.new "Error! Could not submit job: #{self.errors.full_messages}"			
     end
-    # temp
-    server.release
   end
 
   def resubmit

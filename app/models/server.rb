@@ -28,13 +28,12 @@ class Server < ActiveRecord::Base
   #    for the requested language and type
   def self.reserve(job_id, language, platform)
     server = Server.available(language, platform)
-    Rails.logger.info "[INFO]Found available server: #{server}"
+    Rails.logger.info "[INFO]Found available server: #{server.to_yaml}"
     if server
       server.status = 'reserved'
       server.job_id = job_id
-      Rails.logger.info "[INFO]"
       if  server.save
-        Rails.logger.info "[INFO] Reserved server: #{server}"
+        Rails.logger.info "[INFO] Reserved server: #{server.to_yaml}"
         server
       else
         Rails.logger.info "[INFO] Error reserving server: #{server.errors.full_messages}"  

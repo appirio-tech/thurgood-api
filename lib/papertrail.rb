@@ -87,7 +87,7 @@ module Papertrail
   	}  	
 
     Rails.logger.debug "[DEBUG][PT] Creating new Papertrail system with options: #{options}"
-  	results = HTTParty.post("https://papertrailapp.com/api/v1/distributors/systems", options)
+    results = HTTParty.post("https://papertrailapp.com/api/v1/distributors/systems", options)
     Rails.logger.debug "[DEBUG][PT] New Papertrail system: #{results.to_yaml}"
     results    
 
@@ -110,5 +110,30 @@ module Papertrail
     results       
 
   end
+
+  # runs throught all of the methods to ensure they are working
+  def self.check_me
+
+    id = 'cloudspokes-rake-check'
+    email = "#{id}@cloudspokes.com"
+    name = id
+    system_id = 'test-system'
+    
+    # create the papertrail account
+    account_create_results = self.create_account(id, name, email)
+    Rails.logger.fatal "[FATAL] Error creating Papertrail account: #{account_create_results.to_yaml}" if account_create_results['id'] != id
+
+    # get the account
+    account = self.get_account(id)
+    Rails.logger.fatal "[FATAL] Error fetching Papertrail account: #{account.to_yaml}" if account['id'] != id
+
+    # create a system
+    system = self.create_system(system_id, system_id, account['id'])
+    Rails.logger.fatal "[FATAL] Error creating Papertrail system: #{system.to_yaml}" if system['id'] != system_id
+
+    # delete the account
+    delete_results = self.delete_account(id)
+
+  end  
 
 end

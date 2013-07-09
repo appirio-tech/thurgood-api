@@ -64,8 +64,6 @@ class Job < ActiveRecord::Base
     else
       raise ApiExceptions::ProcessError.new "Error! Could not resubmit job: #{self.errors.full_messages}"			
     end
-    # temp
-    server.release
   end	
 
   private

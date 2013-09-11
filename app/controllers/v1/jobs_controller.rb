@@ -24,6 +24,19 @@ class V1::JobsController < V1::ApplicationController
     error! :not_found, :metadata => {:details => WIKI_JOB} if !job
   end
 
+  def info
+    job = Job.find_by_job_id(params[:id])
+    if job
+      logger = LoggerSystem.find(job.papertrail_system)
+      account = LoggerAccount.find(logger.logger_account_id)
+      job_info = {:job => job, 
+        :account => account, 
+        :logger => logger}
+      expose job_info
+    end
+    error! :not_found, :metadata => {:details => WIKI_JOB} if !job
+  end  
+
   def server
     expose Server.find_by_job_id(params[:id])
   end

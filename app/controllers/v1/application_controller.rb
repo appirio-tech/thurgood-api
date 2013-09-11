@@ -1,6 +1,6 @@
 class V1::ApplicationController < RocketPants::Base
 
-  before_filter :restrict_access
+  before_filter :restrict_access, :except => [:info]
 
   WIKI_LOGGER = 'https://github.com/cloudspokes/thurgood-api/wiki/Logger'
   WIKI_JOB = 'https://github.com/cloudspokes/thurgood-api/wiki/Job'

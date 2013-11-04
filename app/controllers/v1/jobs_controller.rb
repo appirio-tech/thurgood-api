@@ -38,7 +38,7 @@ class V1::JobsController < V1::ApplicationController
   end  
 
   def server
-    expose Server.find_by_job_id(params[:id])
+    expose Server.fetch(params[:id])
   end
 
   def logger_system

@@ -9,6 +9,19 @@ class Server < ActiveRecord::Base
     :platform, :repo_name, :status, presence: true
   validates :name, :repo_name, uniqueness: true
 
+  def self.fetch(id)
+    server = Server.find_by_job_id(id)
+    server['version'] = 1 if server
+    # if we didn't find the server, check the new api
+    if !server
+      server = Server2.find_by_job_id(id)
+      server['version'] = 2 if server
+    end
+    puts "===== returning server:"
+    puts server.to_yaml
+    server
+  end 
+
   def self.available(language, platform)
     where("status = ? and languages = ? and platform = ?", "available", 
     language.downcase, platform.downcase).first

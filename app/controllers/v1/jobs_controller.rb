@@ -19,15 +19,13 @@ class V1::JobsController < V1::ApplicationController
   end
 
   def show
-    job = Job.find_by_job_id(params[:id])
-    # if we didn't find the job, check the new api
-    job = Job2.find_by_job_id(params[:id]) if !job
+    job = Job.fetch(params[:id])
     expose job if job
     error! :not_found, :metadata => {:details => WIKI_JOB} if !job
   end
 
   def info
-    job = Job.find_by_job_id(params[:id])
+    job = Job.fetch(params[:id])
     if job
       logger = LoggerSystem.find(job.papertrail_system)
       account = LoggerAccount.find(logger.logger_account_id)
@@ -44,7 +42,7 @@ class V1::JobsController < V1::ApplicationController
   end
 
   def logger_system
-    job = Job.find_by_job_id(params[:id])
+    job = Job.fetch(params[:id])
     expose LoggerSystem.find(job.papertrail_system)
   end	
 
@@ -53,7 +51,7 @@ class V1::JobsController < V1::ApplicationController
   end
 
   def submit
-    job = Job.find_by_job_id(params[:id])
+    job = Job.fetch(params[:id])
     job.submit(params[:options])
     expose job
   rescue Exception => e
@@ -61,7 +59,7 @@ class V1::JobsController < V1::ApplicationController
   end
 
   def resubmit
-    job = Job.find_by_job_id(params[:id])
+    job = Job.fetch(params[:id])
     job.resubmit
     expose job
   rescue Exception => e
@@ -69,7 +67,7 @@ class V1::JobsController < V1::ApplicationController
   end	
 
   def message
-    job = Job.find_by_job_id(params[:id])
+    job = Job.fetch(params[:id])
     job.send_to_logger(params[:message][:text], params[:message][:sender])
     expose 'true'
   rescue Exception => e
@@ -77,7 +75,7 @@ class V1::JobsController < V1::ApplicationController
   end		
 
   def complete
-    job = Job.find_by_job_id(params[:id])
+    job = Job.fetch(params[:id])
     job.status = 'complete'
     job.save
     server = Server.find_by_job_id(params[:id])

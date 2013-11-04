@@ -11,6 +11,17 @@ class Job < ActiveRecord::Base
 
   validates :user_id, :code_url, :language, :platform, presence: true 
 
+  def self.fetch(id)
+    job = Job.find_by_job_id(id)
+    job['version'] = 1 if job
+    # if we didn't find the job, check the new api
+    if !job
+      job = Job2.find_by_job_id(id)
+      job['version'] = 2 if job
+    end
+    job
+  end
+
   def self.by_user_id(user_id)
   where("user_id = ?", user_id).order("created_at DESC")
   end

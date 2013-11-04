@@ -7,6 +7,9 @@ class Job2
     }
 
     job2 = Hashie::Mash.new HTTParty.get("#{ENV['THURGOOD_V2_URL']}/jobs/#{id}", options)
+    puts "#{ENV['THURGOOD_V2_URL']}/jobs/#{id}"
+    puts job2.to_yaml
+
     if job2.success
       data = job2.data.first
       job = Job.new

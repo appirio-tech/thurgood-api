@@ -6,7 +6,7 @@ class Job2
       :headers => api_request_headers   
     }
 
-    job2 = Hashie::Mash.new HTTParty.get("#{ENV['THURGOOD_V2_URL']}/#{id}", options)
+    job2 = Hashie::Mash.new HTTParty.get("#{ENV['THURGOOD_V2_URL']}/jobs/#{id}", options)
     if job2.success
       data = job2.data.first
       job = Job.new

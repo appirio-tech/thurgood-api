@@ -20,6 +20,8 @@ class V1::JobsController < V1::ApplicationController
 
   def show
     job = Job.find_by_job_id(params[:id])
+    # if we didn't find the job, check the new api
+    job = Job2.find_by_job_id(params[:id]) if !job
     expose job if job
     error! :not_found, :metadata => {:details => WIKI_JOB} if !job
   end

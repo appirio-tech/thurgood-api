@@ -1,11 +1,23 @@
 class Job2
 
-  def self.find_by_job_id(id)
+  def self.send_to_logger(id, msg, program)
 
+    payload = {
+      :message => msg, 
+      :facility => program
+    }    
+    options = { 
+      :headers => api_request_headers,
+      :body => payload
+    }
+    results = Hashie::Mash.new HTTParty.post("#{ENV['THURGOOD_V2_URL']}/jobs/#{id}/message", options)
+    raise ApiExceptions::ProcessError.new "Error! #{results.message}" if !results.success
+  end
+
+  def self.find_by_job_id(id)
     options = { 
       :headers => api_request_headers   
     }
-
     job2 = Hashie::Mash.new HTTParty.get("#{ENV['THURGOOD_V2_URL']}/jobs/#{id}", options)
     if job2.success
       data = job2.data.first

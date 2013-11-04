@@ -32,6 +32,10 @@ class Job < ActiveRecord::Base
   end
 
   def send_to_logger(msg, program)
+    if self.version = 2
+      Job2.send_to_logger(self.job_id, msg, program)
+      return
+    end    
     logger_system = LoggerSystem.find(papertrail_system)
     logger = RemoteSyslogLogger.new('logs.papertrailapp.com', logger_system.syslog_port, 
     :local_hostname => logger_system.papertrail_id, 

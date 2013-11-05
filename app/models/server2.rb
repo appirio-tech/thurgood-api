@@ -9,9 +9,10 @@ class Server2
     puts "#{ENV['THURGOOD_V2_URL']}/servers?q=#{URI.escape({:jobId => id}.to_json)}"
     server2 = Hashie::Mash.new HTTParty.get("#{ENV['THURGOOD_V2_URL']}/servers?q=#{URI.escape({:jobId => id}.to_json)}", options)
     puts server2.to_yaml
-    if server2.success
+    if server2.success && !server2.data.empty?
       data = server2.data.first
       server = Server.new
+      server.id = 0
       server.created_at = data.createdAt
       server.installed_services = data.installedServices.join(",")
       server.instance_url = data.instanceUrl

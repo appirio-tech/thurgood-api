@@ -29,7 +29,7 @@ class Job2
       job.job_id = data._id
       job.language = data.language
       if data.options.empty?
-        job.options = {} 
+        job.options = ""
       else
         job.options = data.options.first.to_json
       end

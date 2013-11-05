@@ -7,6 +7,14 @@ class LoggerSystem < ActiveRecord::Base
 
   has_one :logger_account
 
+  def self.fetch(job)
+  	if job['version'] == 1
+  		LoggerSystem.find(job.papertrail_system)
+  	else
+		LoggerSystem2.find(job)
+  	end
+  end
+
   def add_papertrail_id
   	self.papertrail_id = SecureRandom.hex unless self.papertrail_id
 	end	  

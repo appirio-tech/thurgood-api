@@ -17,8 +17,6 @@ class Server < ActiveRecord::Base
       server = Server2.find_by_job_id(id)
       server['version'] = 2 if server
     end
-    puts "===== returning server:"
-    puts server.to_yaml
     server
   end 
 

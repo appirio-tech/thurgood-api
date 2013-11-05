@@ -19,8 +19,6 @@ class Job < ActiveRecord::Base
       job = Job2.find_by_job_id(id)
       job['version'] = 2 if job
     end
-    puts "===== returning job:"
-    puts job.to_yaml
     job
   end
 

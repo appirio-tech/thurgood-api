@@ -43,7 +43,7 @@ class V1::JobsController < V1::ApplicationController
 
   def logger_system
     job = Job.fetch(params[:id])
-    expose LoggerSystem.find(job.papertrail_system)
+    expose LoggerSystem.fetch(job)
   end	
 
   def by_user
